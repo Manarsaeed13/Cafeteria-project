@@ -10,15 +10,18 @@
 </head>
 
 <body>
+ <?php require 'partions/admin-navbar.php' ?>
+
+
+ <p>home page</p>
 
 
 
-    
 
     <script src="js/jquery-4.0.0.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.js"></script>
 
 </body>
-
+  <?php require 'partions/footer.php' ?>
 </html>
