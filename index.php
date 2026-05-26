@@ -10,11 +10,6 @@
 </head>
 
 <body>
-
-
-
-    
-
     <script src="js/jquery-4.0.0.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.js"></script>
