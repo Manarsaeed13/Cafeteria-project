@@ -186,7 +186,7 @@ a {
     <div class="d-none d-md-flex nav-links-desktop">
       <a class="nav-link-custom active" href="admin_home.php">Home</a>
       <a class="nav-link-custom" href="products.php">Products</a>
-      <a class="nav-link-custom" href="admin_users.php">Users</a>
+      <a class="nav-link-custom" href="partions/user.php">Users</a>
       <a class="nav-link-custom" href="manual_order.php">Manual Order</a>
       <a class="nav-link-custom" href="checks.php">Checks</a>
     </div>
@@ -219,9 +219,9 @@ a {
         <i class="bi bi-box-seam-fill"></i> Products
       </a>
       
-      <a href="admin_users.php" class="sidebar-link">
+     <a href="partions/user.php" class="sidebar-link">
         <i class="bi bi-people-fill"></i> Users
-      </a>
+      </a> 
       
       <a href="manual_order.php" class="sidebar-link">
         <i class="bi bi-cart-plus-fill"></i> Manual Order
