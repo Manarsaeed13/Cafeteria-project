@@ -63,6 +63,7 @@ font-size:20px;
 Home
 </a>
 
+
 <a href="#" style="
 text-decoration:none;
 color:#0D530E;
@@ -73,6 +74,7 @@ padding-bottom:5px;
 ">
 Verify Code
 </a>
+
 
 </div>
 
