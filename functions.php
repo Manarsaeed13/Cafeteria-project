@@ -26,3 +26,8 @@ function abort($code = 404)
     require "views/errors/{$code}.php";
     die();
 }
+
+function xss($value) {
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+

@@ -1,11 +1,13 @@
+
 <div class="d-flex justify-content-center align-items-center py-5">
-    <form method="post" action="login_controller.php" id="loginForm" class="p-5 rounded-4 shadow-lg w-100" style="max-width: 450px; background-color: #E7E1B1;" novalidate>
+    <form method="POST" action="login_controller.php" id="loginForm" class="p-5 rounded-4 shadow-lg w-100" style="max-width: 450px; background-color: #E7E1B1;" novalidate>
         <h1 class="text-center fw-bold mb-5 text-success">Cafeteria Login</h1>
 
        <!-- email -->
         <div class="mb-4">
             <label for="email" class="form-label fw-semibold text-success">Email Address</label>
-            <input type="email" name="email" id="email" class="form-control form-control-lg border-2 border-success" placeholder="name@gmail.com" required>
+            <input type="email" name="email" id="email" class="form-control form-control-lg border-2 border-success" placeholder="name@gmail.com" required
+             value="<?= isset($_POST['email']) ? xss($_POST['email']) : '' ?>">
             <div class="invalid-feedback">Please enter a valid email.</div>
         </div>
 
