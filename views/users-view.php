@@ -6,11 +6,11 @@
   <title>Cafeteria System - Users Management</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="users.css">
+  <link rel="stylesheet" href="/public/css/users.css">
 </head>
 <body>
   
-<?php include 'partions/admin-navbar.html'; ?>
+
 
 <div class="container px-4 px-md-5 my-5">
   <div class="d-flex justify-content-between align-items-center mb-4">
@@ -136,9 +136,9 @@
   </div>
 </div>
 
-<?php include 'partions/footer.html'; ?>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="users.js"></script>
+<script src="/public/css/users.js"></script>
 </body>
 </html>
