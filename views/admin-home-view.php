@@ -1,3 +1,7 @@
+
+/** @var array $rooms */
+/** @var array $users */
+/** @var array $products */
 <!DOCTYPE html>
 <html lang="en">
 <head>
