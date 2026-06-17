@@ -1,4 +1,5 @@
 <?php
+
 /** @var string $current_admin_name */
 /** @var string $current_admin_image */
 ?>
@@ -31,7 +32,7 @@
       border-radius: 20px !important;
       padding: 12px 24px !important;
       border: 1px solid rgba(251, 245, 221, 0.2) !important;
-      
+
     }
 
     .menu-toggle-btn {
@@ -265,78 +266,78 @@
         </a>
       </div>
 
-     <div class="d-none d-md-flex nav-links-desktop">
-    <a class="nav-link-custom <?= $current_url === '/admin-home' ? 'active' : '' ?>" href="/admin-home">Home</a>
+      <div class="d-none d-md-flex nav-links-desktop">
+        <a class="nav-link-custom <?= $current_url === '/admin-home' ? 'active' : '' ?>" href="/admin-home">Home</a>
 
-    <a class="nav-link-custom <?= $current_url === '/products' ? 'active' : '' ?>" href="/products">Products</a>
+        <a class="nav-link-custom <?= $current_url === '/products' ? 'active' : '' ?>" href="/products">Products</a>
 
-    <a class="nav-link-custom <?= $current_url === '/admin/users' ? 'active' : '' ?>" href="/admin/users">Users</a>
+        <a class="nav-link-custom <?= $current_url === '/admin/users' ? 'active' : '' ?>" href="/admin/users">Users</a>
 
-    <a class="nav-link-custom <?= $current_url === '/manual_order' ? 'active' : '' ?>" href="/manual_order">Manual Order</a>
+        <a class="nav-link-custom <?= $current_url === '/admin/manual_order' ? 'active' : '' ?>" href="/admin/manual_order">Manual Order</a>
 
-    <a class="nav-link-custom <?= $current_url === '/admin-checks' ? 'active' : '' ?>" href="/admin-checks">Checks</a>
-</div>
+        <a class="nav-link-custom <?= $current_url === '/admin/checks' ? 'active' : '' ?>" href="/admin/checks">Checks</a>
+      </div>
 
 
     </nav>
 
   </div>
-<div class="offcanvas offcanvas-start custom-sidebar d-flex flex-column" tabindex="-1" id="dribbbleSidebar">
+  <div class="offcanvas offcanvas-start custom-sidebar d-flex flex-column" tabindex="-1" id="dribbbleSidebar">
 
     <div class="sidebar-header d-flex align-items-center justify-content-between">
-        <a class="brand d-flex align-items-center gap-2" href="/">
-            <i class="bi bi-cup-hot-fill"></i> CAFETERIA
-        </a>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" 
-            style="filter: invert(21%) sepia(82%) saturate(518%) hue-rotate(74deg) brightness(91%) contrast(97%);"></button>
+      <a class="brand d-flex align-items-center gap-2" href="/">
+        <i class="bi bi-cup-hot-fill"></i> CAFETERIA
+      </a>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+        style="filter: invert(21%) sepia(82%) saturate(518%) hue-rotate(74deg) brightness(91%) contrast(97%);"></button>
     </div>
 
     <div class="offcanvas-body p-3">
-        <div class="d-flex flex-column h-100">
+      <div class="d-flex flex-column h-100">
 
-            <a href="/admin-home" class="sidebar-link <?= $current_url === '/admin-home' ? 'active' : '' ?>">
-                <i class="bi bi-house-door-fill"></i> Home
-            </a>
+        <a href="/admin-home" class="sidebar-link <?= $current_url === '/admin-home' ? 'active' : '' ?>">
+          <i class="bi bi-house-door-fill"></i> Home
+        </a>
 
-            <a href="/products" class="sidebar-link <?= $current_url === '/products' ? 'active' : '' ?>">
-                <i class="bi bi-box-seam-fill"></i> Products
-            </a>
+        <a href="/products" class="sidebar-link <?= $current_url === '/products' ? 'active' : '' ?>">
+          <i class="bi bi-box-seam-fill"></i> Products
+        </a>
 
-            <a href="/admin/users" class="sidebar-link <?= $current_url === '/admin/users' ? 'active' : '' ?>">
-                <i class="bi bi-people-fill"></i> Users
-            </a>
+        <a href="/admin/users" class="sidebar-link <?= $current_url === '/admin/users' ? 'active' : '' ?>">
+          <i class="bi bi-people-fill"></i> Users
+        </a>
 
-            <a href="/manual_order" class="sidebar-link <?= $current_url === '/manual_order' ? 'active' : '' ?>">
-                <i class="bi bi-cart-plus-fill"></i> Manual Order
-            </a>
+        <a href="/admin/manual_order" class="sidebar-link <?= $current_url === '/admin/manual_order' ? 'active' : '' ?>">
+          <i class="bi bi-cart-plus-fill"></i> Manual Order
+        </a>
 
-            <a href="/admin-checks" class="sidebar-link <?= $current_url === '/admin-checks' ? 'active' : '' ?>">
-                <i class="bi bi-receipt-cutoff"></i> Checks
-            </a>
-
-
+        <a href="/admin/checks" class="sidebar-link <?= $current_url === '/admin/checks' ? 'active' : '' ?>">
+          <i class="bi bi-receipt-cutoff"></i> Checks
+        </a>
 
 
 
 
-               <!-- admin photo and name from data base -->
-    <div class="sidebar-admin-box d-flex align-items-center gap-3">
-    <img src="/images/<?= basename($current_admin_image) ?>" 
-     class="admin-img" 
-     alt="Admin"
-     style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;"> 
-        
-    
-    <div>
-        <div class="admin-name"><?= htmlspecialchars($current_admin_name) ?></div>
-        <div class="admin-role">Admin</div>
-    </div>
-</div>
 
 
+        <!-- admin photo and name from data base -->
+        <div class="sidebar-admin-box d-flex align-items-center gap-3">
+          <img src="/images/<?= basename($current_admin_image) ?>"
+            class="admin-img"
+            alt="Admin"
+            style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
+
+
+          <div>
+            <div class="admin-name"><?= htmlspecialchars($current_admin_name) ?></div>
+            <div class="admin-role">Admin</div>
+          </div>
         </div>
+
+
+      </div>
     </div>
-</div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

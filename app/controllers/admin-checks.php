@@ -1,5 +1,5 @@
 <?php
-require __DIR__ .'/../../Database.php';
+require __DIR__ . '/../../Database.php';
 
 $config = require __DIR__ . '/../../config.php';
 $db = new Database($config, 'root', '');
@@ -39,7 +39,9 @@ $countQuery = "SELECT COUNT(DISTINCT u.ID) as total
                JOIN products p    ON oi.product_id = p.ID
                WHERE $whereSQL";
 
-$totalRecords = $db->query($countQuery, $params)->find()['total'] ?? 0;
+$totalResult  = $db->query($countQuery, $params)->get();
+$totalRecords = $totalResult[0]['total'] ?? 0;
+
 $totalPages   = ceil($totalRecords / $limit);
 
 

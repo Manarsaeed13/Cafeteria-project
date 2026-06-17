@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria Checks</title>
-    <link rel="stylesheet" href="../../css/bootstrap.css">
-    <link rel="stylesheet" href="../../css/checks.css">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../../public/css/checks.css">
     <style>
         .custom-pagination .page-link {
             color: #0D530E;
@@ -160,7 +160,7 @@
         </nav>
     <?php endif; ?>
 
-    <script src="../../js/bootstrap.js"></script>
+    <script src="../../public/js/bootstrap.js"></script>
 </body>
 
 </html>

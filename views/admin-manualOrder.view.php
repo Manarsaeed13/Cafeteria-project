@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria - Current Orders</title>
-    <link rel="stylesheet" href="../../css/bootstrap.css">
-    <link rel="stylesheet" href="../../css/manualOrder.css">
+    <link rel="stylesheet" href="../../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../../public/css/manualOrder.css">
     <style>
         th {
             background-color: #E7E1B1 !important;
@@ -96,7 +96,7 @@
     </div>
     <?php require __DIR__ ."/../partions/footer.php" ?>
 
-    <script src="../../js/bootstrap.js"></script>
+    <script src="../../public/js/bootstrap.js"></script>
 </body>
 
 </html>

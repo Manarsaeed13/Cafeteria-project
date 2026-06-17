@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $exists = $db->query(
             "SELECT ID FROM orders WHERE ID = :id AND Status = 'processing'",
             [':id' => $orderId]
-        )->find();
+        )->get();
 
         if ($exists) {
             $db->query(
