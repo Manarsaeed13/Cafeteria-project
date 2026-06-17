@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria - Current Orders</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/manualOrder.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/manualOrder.css">
     <style>
         th {
             background-color: #E7E1B1 !important;
             color: #0D530E !important;
             font-size: larger;
         }
+
         td {
             background-color: #FBF5DD !important;
             color: #0D530E !important;
@@ -24,7 +25,7 @@
 
 <body>
 
-    <?php require "partions/admin-navbar.php" ?>
+    <?php require __DIR__ ."/../partions/admin-navbar.php" ?>
 
     <h1 class="container order_header">Orders</h1>
 
@@ -72,9 +73,9 @@
                                             <?= htmlspecialchars($item['Price']) ?> LE
                                         </span>
                                         <img src="<?= htmlspecialchars($item['Image']) ?>"
-                                             alt="<?= htmlspecialchars($item['Name']) ?>"
-                                             class="img-fluid rounded border border-dark mb-1 position-relative z-0"
-                                             style="height: 60px; object-fit: cover; background-color: white;">
+                                            alt="<?= htmlspecialchars($item['Name']) ?>"
+                                            class="img-fluid rounded border border-dark mb-1 position-relative z-0"
+                                            style="height: 60px; object-fit: cover; background-color: white;">
                                         <div style="font-size: 13px; color: #0D530E;" class="fw-bold"><?= htmlspecialchars($item['Name']) ?></div>
                                         <div style="font-size: 15px; color: #0D530E;" class="fw-bold"> <?= htmlspecialchars($item['quantity']) ?></div>
                                     </div>
@@ -93,8 +94,9 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
+    <?php require __DIR__ ."/../partions/footer.php" ?>
 
-    <script src="js/bootstrap.js"></script>
+    <script src="../../js/bootstrap.js"></script>
 </body>
 
 </html>

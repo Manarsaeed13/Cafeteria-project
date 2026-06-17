@@ -1,7 +1,7 @@
 <?php
-require 'Database.php';
+require __DIR__ .'/../../Database.php';
 
-$config = require 'config.php';
+$config = require __DIR__ . '/../../config.php';
 $db = new Database($config, 'root', '');
 
 $dateFrom = $_GET['dateFrom'] ?? null;
@@ -99,4 +99,4 @@ if (!empty($usersSummary)) {
 
 $allUsersList = $db->query("SELECT ID, Name FROM users WHERE role = 'user' ORDER BY Name ASC")->get();
 
-require "admin-checks.view.php";
+require  __DIR__ . "/../../views/admin-checks.view.php";

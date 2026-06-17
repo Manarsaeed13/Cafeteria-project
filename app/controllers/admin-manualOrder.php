@@ -1,7 +1,7 @@
 <?php
-require 'Database.php';
+require __DIR__ . '/../../Database.php';
 
-$config = require 'config.php';
+$config = require __DIR__ . '/../../config.php';
 $db = new Database($config, 'root', '');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'deliver') {
@@ -53,4 +53,4 @@ foreach ($pendingOrders as &$order) {
 }
 unset($order);
 
-require "admin-manualOrder.view.php";
+require __DIR__ . "/../../views/admin-manualOrder.view.php";
