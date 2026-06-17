@@ -1,33 +1,31 @@
 <?php
-
-
-function dd($value)
-{
-    echo "<pre>";
-    var_dump($value);
-    echo "</pre>";
-    die();
-}
-
-function urlIs($url)
-{
-    return $_SERVER['REQUEST_URI'] === $url;
-}
-
-function authorize($condition, $status = Response::FORBIDDEN)
-{
-    if (!$condition) {
-        abort($status);
+if (!function_exists('dd')) {
+    function dd($data) {
+        echo '<pre>'; var_dump($data); echo '</pre>'; die();
     }
 }
-function abort($code = 404)
-{
+
+if (!function_exists('urlIs')) {
+    function urlIs($url) {
+        return $_SERVER['REQUEST_URI'] === $url;
+    }
+}
+
+if (!function_exists('authorize')) {
+    function authorize($condition, $status = 403) {
+        if (!$condition) { abort($status); }
+    }
+}
+
+function abort($code = 404) {
     http_response_code($code);
-    require "views/errors/{$code}.php";
+    require "views/errors/{$code}.php"; 
     die();
 }
 
-function xss($value) {
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+if (!function_exists('xss')) {
+    function xss($value) {
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+    }
 }
-
+?>
