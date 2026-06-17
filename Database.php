@@ -4,13 +4,20 @@ class Database
     public $connection;
     public $statement;
 
-    public function __construct($config, $username = 'root', $password = '')
+    public function __construct()
     {
-        $dsn = "mysql:" . http_build_query($config, '', ';');
+        $config = require __DIR__ . '/config.php';
 
-        $this->connection = new PDO($dsn, $username, $password, [
+        $dsn = "mysql:" . http_build_query([
+            'host'   => $config['host'],
+            'port'   => $config['port'],
+            'dbname' => $config['dbname'],
+            'charset' => $config['charset']
+        ], '', ';');
+
+        $this->connection = new PDO($dsn, $config['user'], $config['password'], [
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION
         ]);
     }
 
@@ -18,7 +25,6 @@ class Database
     {
         $this->statement = $this->connection->prepare($query);
         $this->statement->execute($params);
-
         return $this;
     }
 
@@ -26,21 +32,4 @@ class Database
     {
         return $this->statement->fetchAll();
     }
-
-    public function find()
-    {
-        return $this->statement->fetch();
-    }
-
-public function findOrFail()
-{
-    $result = $this->find();
-    
-    if (!$result) {
-      
-        abort(404); 
-    }
-
-    return $result;
-}
 }
