@@ -85,7 +85,7 @@
                  onclick="addToCart({id: <?= $product['ID'] ?>, name: '<?= $product['Name'] ?>', price: <?= $product['Price'] ?>})">
                 
                 <div class="img-wrapper d-flex align-items-center justify-content-center mx-auto mb-3 rounded-circle bg-light border" style="width: 80px; height: 80px; overflow: hidden;">
-                    <img src="<?= $product['Image'] ?>" 
+                    <img src="/<?= $product['Image'] ?>" 
                          alt="<?= $product['Name'] ?>" 
                          class="img-fluid w-100 h-100 object-fit-cover" 
                          onerror="this.src='https://via.placeholder.com/150';">

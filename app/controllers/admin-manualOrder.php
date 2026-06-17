@@ -1,7 +1,6 @@
 <?php
-require __DIR__ . '/../../Database.php';
-
-$config = require __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../Database.php';
+$config = require_once __DIR__ . '/../../config.php';
 $db = new Database($config, 'root', '');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'deliver') {
@@ -21,8 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             );
         }
     }
-
-    header("Location: admin-manualOrder.php");
+ header("Location: /admin/manual_order");
     exit;
 }
 

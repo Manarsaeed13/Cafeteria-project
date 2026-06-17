@@ -1,3 +1,13 @@
+<?php
+/** @var string $dateFrom */
+/** @var string $dateTo */
+/** @var string $userId */
+/** @var int $page */
+/** @var int $totalPages */
+/** @var array $usersSummary */
+/** @var array $userOrders */
+/** @var array $allUsersList */
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +47,7 @@
 
     <h1 class="container check_header">Checks</h1>
 
-    <form class="check_form" method="GET" action="admin-checks.php">
+    <form class="check_form" method="GET" action="/admin/checks">
         <label for="dateFrom">Date from</label>
         <input type="date" name="dateFrom" id="dateFrom" value="<?= htmlspecialchars($dateFrom ?? '') ?>">
 
@@ -112,7 +122,7 @@
                                                                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark border border-dark z-1">
                                                                             <?= htmlspecialchars($item['Price']) ?> LE
                                                                         </span>
-                                                                        <img src="../<?= htmlspecialchars($item['Image']) ?>" alt="<?= htmlspecialchars($item['Name']) ?>" class="img-fluid rounded border border-dark mb-1 position-relative z-0" style="height: 60px; object-fit: cover; background-color: white;">
+                                                                        <img src="/<?= htmlspecialchars($item['Image']) ?>" alt="<?= htmlspecialchars($item['Name']) ?>" class="img-fluid rounded border border-dark mb-1 position-relative z-0" style="height: 60px; object-fit: cover; background-color: white;">
                                                                         <div style="font-size: 12px; color: #0D530E;" class="fw-bold"><?= htmlspecialchars($item['Name']) ?></div>
                                                                         <div style="font-size: 13px; color: #0D530E;" class="fw-bold">Qty: <?= htmlspecialchars($item['quantity']) ?></div>
                                                                     </div>

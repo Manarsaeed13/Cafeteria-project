@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         userSelect.value = "";
                         roomSelect.value = "";
                         document.getElementById("order-notes").value = "";
-                        window.location.href = '/admin-checks';
+                    window.location.href = '/admin/checks';
                     } else {
                         console.error("Server error:", data.message);
                     }

@@ -55,7 +55,7 @@
                                 <span style="color: #0D530E; font-weight: 600;"><?= htmlspecialchars($order['Ext']) ?></span>
                             </div>
                             <div class="col py-2">
-                                <form method="POST" action="admin-manualOrder.php" style="margin: 0;">
+                               <form method="POST" action="/admin/manual_order">
                                     <input type="hidden" name="action" value="deliver">
                                     <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['ID']) ?>">
                                     <button type="submit" class="btn btn-success w-75 fw-bold">Deliver</button>
@@ -72,7 +72,7 @@
                                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark border border-dark z-1">
                                             <?= htmlspecialchars($item['Price']) ?> LE
                                         </span>
-                                        <img src="<?= htmlspecialchars($item['Image']) ?>"
+                                        <img src="/<?= htmlspecialchars($item['Image']) ?>"
                                             alt="<?= htmlspecialchars($item['Name']) ?>"
                                             class="img-fluid rounded border border-dark mb-1 position-relative z-0"
                                             style="height: 60px; object-fit: cover; background-color: white;">

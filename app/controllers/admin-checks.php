@@ -1,9 +1,7 @@
 <?php
-require __DIR__ . '/../../Database.php';
-
-$config = require __DIR__ . '/../../config.php';
-$db = new Database($config, 'root', '');
-
+require_once __DIR__ . '/../../Database.php';
+$db = new Database();
+$config = require_once __DIR__ . '/../../config.php';
 $dateFrom = $_GET['dateFrom'] ?? null;
 $dateTo   = $_GET['dateTo']   ?? null;
 $userId   = $_GET['userId']   ?? 'all';
@@ -101,4 +99,6 @@ if (!empty($usersSummary)) {
 
 $allUsersList = $db->query("SELECT ID, Name FROM users WHERE role = 'user' ORDER BY Name ASC")->get();
 
-require  __DIR__ . "/../../views/admin-checks.view.php";
+$base_path = "D:/my web project/cafetaria-project/";
+require __DIR__ . "/../../views/admin-checks.view.php";
+include $base_path . 'partions/footer.php';

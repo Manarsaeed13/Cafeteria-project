@@ -1,18 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    fetch('partions/admin-navbar.html')
-        .then(response => response.text())
-        .then(data => { document.getElementById('navbar-placeholder').innerHTML = data; })
-        .catch(error => console.error('Error loading navbar:', error));
-
-    fetch('partions/footer.html')
-        .then(response => response.text())
-        .then(data => { document.getElementById('footer-placeholder').innerHTML = data; })
-        .catch(error => console.error('Error loading footer:', error));
-
 
     const tableBody = document.getElementById('users-table-body');
-    const rowsPerPage = 2; 
+    const rowsPerPage = 4;
     let currentPage = 1;
 
     function displayTablePage(page) {
@@ -41,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const rows = tableBody.querySelectorAll('tr');
         const totalPages = Math.ceil(rows.length / rowsPerPage);
-        
+
         if (e.target.classList.contains('page-number-btn')) {
             displayTablePage(parseInt(e.target.textContent));
         }
@@ -56,9 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
     let rowToEdit = null;
-    let rowToDelete = null; 
+    let userIdToEdit = null;
+    let rowToDelete = null;
+    let userIdToDelete = null;
 
     const editModal = new bootstrap.Modal(document.getElementById('editUserModal'));
     const deleteModal = new bootstrap.Modal(document.getElementById('deleteUserModal'));
@@ -66,59 +56,115 @@ document.addEventListener('DOMContentLoaded', () => {
     const editForm = document.getElementById('edit-user-form');
     const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
 
+    // ── Open modals ──────────────────────────────────────────────────────────
     tableBody.addEventListener('click', (e) => {
         const targetRow = e.target.closest('tr');
         if (!targetRow) return;
 
         if (e.target.classList.contains('btn-delete')) {
-            rowToDelete = targetRow; 
+            rowToDelete = targetRow;
+            userIdToDelete = e.target.dataset.id;
             const userName = targetRow.querySelector('.user-name-cell').textContent.trim();
-
             document.getElementById('delete-user-name').textContent = `"${userName}"`;
-            
             deleteModal.show();
         }
 
         if (e.target.classList.contains('btn-edit')) {
             rowToEdit = targetRow;
-            const currentName = targetRow.querySelector('.user-name-cell').textContent.trim();
-            const currentRoom = targetRow.querySelector('.user-room-cell').textContent.trim();
-            const currentExt = targetRow.querySelector('.user-ext-cell').textContent.trim();
+            userIdToEdit = e.target.dataset.id;
 
-            document.getElementById('edit-name').value = currentName;
-            document.getElementById('edit-room').value = currentRoom;
-            document.getElementById('edit-ext').value = currentExt;
+            document.getElementById('edit-name').value = targetRow.querySelector('.user-name-cell').textContent.trim();
+            document.getElementById('edit-room').value = targetRow.querySelector('.user-room-cell').textContent.trim();
+            document.getElementById('edit-ext').value  = targetRow.querySelector('.user-ext-cell').textContent.trim();
 
             editModal.show();
         }
     });
 
-    confirmDeleteBtn.addEventListener('click', () => {
-        if (rowToDelete) {
-            rowToDelete.style.transition = "all 0.3s ease";
-            rowToDelete.style.opacity = "0";
-            rowToDelete.style.transform = "translateX(20px)";
-            
-            setTimeout(() => {
-                rowToDelete.remove();
-                
-                const rows = tableBody.querySelectorAll('tr');
-                const totalPages = Math.ceil(rows.length / rowsPerPage);
-                if (currentPage > totalPages && currentPage > 1) currentPage = totalPages;
-                displayTablePage(currentPage);
-                
-                deleteModal.hide();
-            }, 300);
+    // ── Delete ────────────────────────────────────────────────────────────────
+    confirmDeleteBtn.addEventListener('click', async () => {
+        if (!rowToDelete || !userIdToDelete) return;
+
+        confirmDeleteBtn.disabled = true;
+        confirmDeleteBtn.textContent = 'Deleting...';
+
+        try {
+           const res = await fetch('/delete-user', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: userIdToDelete })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                rowToDelete.style.transition = 'all 0.3s ease';
+                rowToDelete.style.opacity    = '0';
+                rowToDelete.style.transform  = 'translateX(20px)';
+
+                setTimeout(() => {
+                    rowToDelete.remove();
+
+                    const rows       = tableBody.querySelectorAll('tr');
+                    const totalPages = Math.ceil(rows.length / rowsPerPage);
+                    if (currentPage > totalPages && currentPage > 1) currentPage = totalPages;
+                    displayTablePage(currentPage);
+
+                    deleteModal.hide();
+                    rowToDelete    = null;
+                    userIdToDelete = null;
+                }, 300);
+            } else {
+                alert('Error: ' + (data.message || 'Could not delete user'));
+            }
+        } catch (err) {
+            alert('Network error. Please try again.');
+            console.error(err);
+        } finally {
+            confirmDeleteBtn.disabled    = false;
+            confirmDeleteBtn.textContent = 'Delete';
         }
     });
 
-    editForm.addEventListener('submit', (e) => {
+    // ── Edit ──────────────────────────────────────────────────────────────────
+    editForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        if (rowToEdit) {
-            rowToEdit.querySelector('.user-name-cell').textContent = document.getElementById('edit-name').value;
-            rowToEdit.querySelector('.user-room-cell').textContent = document.getElementById('edit-room').value;
-            rowToEdit.querySelector('.user-ext-cell').textContent = document.getElementById('edit-ext').value;
-            editModal.hide();
+        if (!rowToEdit || !userIdToEdit) return;
+
+        const saveBtn = editForm.querySelector('[type="submit"]');
+        saveBtn.disabled    = true;
+        saveBtn.textContent = 'Saving...';
+
+        const newName = document.getElementById('edit-name').value.trim();
+        const newRoom = document.getElementById('edit-room').value.trim();
+        const newExt  = document.getElementById('edit-ext').value.trim();
+
+        try {
+            const res = await fetch('/update-user', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: userIdToEdit, name: newName, room: newRoom, ext: newExt })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                rowToEdit.querySelector('.user-name-cell').textContent = newName;
+                rowToEdit.querySelector('.user-room-cell').textContent = newRoom;
+                rowToEdit.querySelector('.user-ext-cell').textContent  = newExt;
+
+                editModal.hide();
+                rowToEdit    = null;
+                userIdToEdit = null;
+            } else {
+                alert('Error: ' + (data.message || 'Could not update user'));
+            }
+        } catch (err) {
+            alert('Network error. Please try again.');
+            console.error(err);
+        } finally {
+            saveBtn.disabled    = false;
+            saveBtn.textContent = 'Save Changes';
         }
     });
 
