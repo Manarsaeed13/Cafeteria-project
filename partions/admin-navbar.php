@@ -1,7 +1,7 @@
-
-
-
-
+<?php
+/** @var string $current_admin_name */
+/** @var string $current_admin_image */
+?>
 <?php global $current_url; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +31,7 @@
       border-radius: 20px !important;
       padding: 12px 24px !important;
       border: 1px solid rgba(251, 245, 221, 0.2) !important;
+      
     }
 
     .menu-toggle-btn {
@@ -273,7 +274,7 @@
 
     <a class="nav-link-custom <?= $current_url === '/manual_order' ? 'active' : '' ?>" href="/manual_order">Manual Order</a>
 
-    <a class="nav-link-custom <?= $current_url === '/checks' ? 'active' : '' ?>" href="/checks">Checks</a>
+    <a class="nav-link-custom <?= $current_url === '/admin-checks' ? 'active' : '' ?>" href="/admin-checks">Checks</a>
 </div>
 
 
@@ -309,18 +310,22 @@
                 <i class="bi bi-cart-plus-fill"></i> Manual Order
             </a>
 
-            <a href="/checks" class="sidebar-link <?= $current_url === '/checks' ? 'active' : '' ?>">
+            <a href="/admin-checks" class="sidebar-link <?= $current_url === '/admin-checks' ? 'active' : '' ?>">
                 <i class="bi bi-receipt-cutoff"></i> Checks
             </a>
-
-            <div class="sidebar-admin-box d-flex align-items-center gap-3">
-                <img src="https://via.placeholder.com/60" class="admin-img" alt="Admin">
-                <div>
-                    <div class="admin-name">Samantha W</div>
-                    <div class="admin-role">Admin</div>
-                </div>
-            </div>
-
+               <--admin photo and name from data base->
+    <div class="sidebar-admin-box d-flex align-items-center gap-3">
+    <img src="/images/<?= basename($current_admin_image) ?>" 
+     class="admin-img" 
+     alt="Admin"
+     style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;"> 
+        
+    
+    <div>
+        <div class="admin-name"><?= htmlspecialchars($current_admin_name) ?></div>
+        <div class="admin-role">Admin</div>
+    </div>
+</div>
         </div>
     </div>
 </div>
