@@ -1,6 +1,5 @@
 let cart = [];
 
-// 1. البحث
 document.getElementById('search-input')?.addEventListener('input', (e) => {
     const term = e.target.value.toLowerCase().trim();
     document.querySelectorAll('.product-col').forEach(col => {
@@ -9,7 +8,6 @@ document.getElementById('search-input')?.addEventListener('input', (e) => {
     });
 });
 
-// 2. إخفاء التحذيرات فور اختيار قيمة
 document.getElementById('user-select').addEventListener('change', function() {
     if(this.value) document.getElementById('user-warning').classList.add('d-none');
 });
@@ -17,7 +15,6 @@ document.getElementById('room-select').addEventListener('change', function() {
     if(this.value) document.getElementById('room-warning').classList.add('d-none');
 });
 
-// 3. إضافة للمنتج
 window.addToCart = function(product) {
     document.getElementById('cart-warning').classList.add('d-none');
     const existingItem = cart.find(item => item.id === product.id);
@@ -29,7 +26,6 @@ window.addToCart = function(product) {
     updateCartUI();
 };
 
-// 4. تحديث واجهة السلة
 window.updateCartUI = function() {
     const cartContainer = document.getElementById("cart-items");
     const totalPriceElement = document.getElementById("total-price");
@@ -89,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const userWarning = document.getElementById("user-warning");
             const roomWarning = document.getElementById("room-warning");
 
-            // إخفاء التحذيرات أولاً
+         
             cartWarning.classList.add("d-none");
             userWarning.classList.add("d-none");
             roomWarning.classList.add("d-none");

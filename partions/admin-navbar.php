@@ -313,7 +313,13 @@
             <a href="/admin-checks" class="sidebar-link <?= $current_url === '/admin-checks' ? 'active' : '' ?>">
                 <i class="bi bi-receipt-cutoff"></i> Checks
             </a>
-               <--admin photo and name from data base->
+
+
+
+
+
+
+               <!-- admin photo and name from data base -->
     <div class="sidebar-admin-box d-flex align-items-center gap-3">
     <img src="/images/<?= basename($current_admin_image) ?>" 
      class="admin-img" 
@@ -326,6 +332,8 @@
         <div class="admin-role">Admin</div>
     </div>
 </div>
+
+
         </div>
     </div>
 </div>
