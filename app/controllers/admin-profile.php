@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . "/../../Database.php";
-require_once __DIR__ . "/../../functions.php";
 
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
     $config = require __DIR__ . "/../../config.php";
