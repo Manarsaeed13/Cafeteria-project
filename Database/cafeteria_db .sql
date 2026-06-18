@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 17, 2026 at 02:54 PM
+-- Generation Time: Jun 18, 2026 at 01:00 PM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.30
 
@@ -77,13 +77,24 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`ID`, `User_id`, `Room_id`, `Notes`, `Total_price`, `Status`, `created_at`) VALUES
-(1, 1, 1, '', 25.00, 'processing', '2026-06-17 15:21:30'),
-(2, 1, 1, '', 20.00, 'processing', '2026-06-17 15:36:57'),
-(3, 1, 1, '', 20.00, 'processing', '2026-06-17 15:37:26'),
-(4, 1, 1, '', 10.00, 'processing', '2026-06-17 15:40:26'),
-(5, 1, 1, 'with ice', 94.00, 'processing', '2026-06-17 16:06:44'),
-(6, 1, 1, '', 25.00, 'processing', '2026-06-17 16:09:19'),
-(7, 1, 1, '', 58.00, 'processing', '2026-06-17 16:11:01');
+(1, 1, 1, '', 25.00, 'done', '2026-06-17 15:21:30'),
+(2, 1, 1, '', 20.00, 'done', '2026-06-17 15:36:57'),
+(3, 1, 1, '', 20.00, 'done', '2026-06-17 15:37:26'),
+(4, 1, 1, '', 10.00, 'done', '2026-06-17 15:40:26'),
+(5, 1, 1, 'with ice', 94.00, 'done', '2026-06-17 16:06:44'),
+(6, 1, 1, '', 25.00, 'done', '2026-06-17 16:09:19'),
+(7, 1, 1, '', 58.00, 'processing', '2026-06-17 16:11:01'),
+(8, 3, 2, '', 60.00, 'processing', '2026-06-17 23:03:11'),
+(9, 8, 2, '', 43.00, 'processing', '2026-06-17 23:12:34'),
+(10, 8, 2, '', 22.00, 'processing', '2026-06-17 23:15:12'),
+(11, 5, 2, '', 54.00, 'processing', '2026-06-17 23:20:41'),
+(12, 6, 2, '', 43.00, 'processing', '2026-06-17 23:22:10'),
+(13, 3, 2, '', 25.00, 'processing', '2026-06-17 23:26:36'),
+(14, 5, 2, '', 70.00, 'processing', '2026-06-17 23:27:18'),
+(15, 5, 2, '', 58.00, 'done', '2026-06-17 23:39:47'),
+(16, 5, 2, '', 60.00, 'done', '2026-06-17 23:45:37'),
+(17, 3, 3, 'no suger', 45.00, 'done', '2026-06-18 12:21:52'),
+(18, 5, 2, '', 100.00, 'processing', '2026-06-18 15:45:25');
 
 -- --------------------------------------------------------
 
@@ -115,7 +126,26 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `unit_pri
 (9, 6, 1, 1, 25.00),
 (10, 7, 1, 1, 25.00),
 (11, 7, 5, 1, 18.00),
-(12, 7, 6, 1, 15.00);
+(12, 7, 6, 1, 15.00),
+(13, 8, 1, 1, 25.00),
+(14, 8, 2, 1, 35.00),
+(15, 9, 4, 1, 43.00),
+(16, 10, 7, 1, 22.00),
+(17, 11, 7, 1, 22.00),
+(18, 11, 8, 1, 32.00),
+(19, 12, 4, 1, 43.00),
+(20, 13, 1, 1, 25.00),
+(21, 14, 2, 2, 35.00),
+(22, 15, 1, 1, 25.00),
+(23, 15, 5, 1, 18.00),
+(24, 15, 6, 1, 15.00),
+(25, 16, 2, 1, 35.00),
+(26, 16, 6, 1, 15.00),
+(27, 16, 17, 1, 10.00),
+(28, 17, 6, 3, 15.00),
+(29, 18, 2, 1, 35.00),
+(30, 18, 4, 1, 43.00),
+(31, 18, 7, 1, 22.00);
 
 -- --------------------------------------------------------
 
@@ -185,7 +215,10 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`ID`, `Room_number`) VALUES
-(1, '101');
+(1, '101'),
+(2, '102'),
+(3, '103'),
+(4, '104');
 
 -- --------------------------------------------------------
 
@@ -209,8 +242,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `Name`, `E-mail`, `Password`, `Profile_picture`, `role`, `Ext`, `Room_ID`) VALUES
-(1, 'Ahmed Mohamed', 'Ahmed@gmail.com', '$2y$12$REPLACE_THIS_WITH_A_REAL_BCRYPT_HASH_OF_THE_PASSWORD___', 'images/Boy1.jpeg', 'user', 123, 1),
-(2, 'manar saeed', 'manarsaeed445@gmail.com', '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'images/Girl1.jpeg', 'admin', 0, NULL);
+(1, 'Ahmed Mohamed', 'Ahmed@gmail.com', '$2y$12$REPLACE_THIS_WITH_A_REAL_BCRYPT_HASH_OF_THE_PASSWORD___', 'images/Boy1.jpeg', 'user', 12, 1),
+(2, 'manar saeed', 'manarsaeed445@gmail.com', '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'images/Girl1.jpeg', 'admin', 0, NULL),
+(3, 'Mariam Ali', 'mariam@example.com', '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYgi7B7DoKa', 'images\\Girl1.jpeg', 'user', 11, 3),
+(5, 'Malak Khaled', 'malak@example.com', '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYgi7B7DoKa', 'images\\Girl2.jpeg', 'user', 13, 2),
+(6, 'Merna malek', 'merna@example.com', '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYgi7B7DoKa', 'images\\Girl1.jpeg', 'user', 14, 4),
+(8, 'Marina Ashraf', 'marina@example.com', '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYgi7B7DoKa', 'images\\Girl1.jpeg', 'user', 15, 2);
 
 --
 -- Indexes for dumped tables
@@ -280,13 +317,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
@@ -304,13 +341,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
