@@ -8,5 +8,4 @@ return [
     '/admin/manual_order'  => 'app/controllers/admin-manualOrder.php',
     '/delete-user'         => 'app/controllers/delete-user.php',
     '/update-user'         => 'app/controllers/update-user.php',
-    '/dashboard'         => 'app/controllers/dashboard.php',
 ];

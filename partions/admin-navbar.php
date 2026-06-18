@@ -319,9 +319,15 @@
                 <i class="bi bi-cart-plus-fill"></i> Manual Order
             </a>
 
-        <a href="/admin/checks" class="sidebar-link <?= $current_url === '/admin/checks' ? 'active' : '' ?>">
-          <i class="bi bi-receipt-cutoff"></i> Checks
-        </a>
+        // ... ده الكود اللي موجود عندك في الملف (حوالي سطر 314)
+<a href="/admin/checks" class="sidebar-link <?= $current_url === '/admin/checks' ? 'active' : '' ?>">
+  <i class="bi bi-receipt-cutoff"></i> Checks
+</a>
+
+<a href="/admin/profile" class="sidebar-link <?= $current_url === '/admin/profile' ? 'active' : '' ?>">
+    <i class="bi bi-person-badge-fill"></i> My Profile
+</a>
+
 
         <a href="/dashboard" class="sidebar-link <?= $current_url === '/dashboard' ? 'active' : '' ?>">
           <i class="bi bi-receipt-cutoff"></i> Dashboard
