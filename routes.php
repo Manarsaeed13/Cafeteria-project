@@ -1,6 +1,6 @@
 <?php
 return [
-    '/'                    => 'index.php',
+    '/'                     => 'app/controllers/login.php',
     '/admin-home'          => 'app/controllers/admin-home.php',
     '/admin-users'         => 'app/controllers/users.php',
     '/save-order'          => 'app/controllers/save-order.php',
