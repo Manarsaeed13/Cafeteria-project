@@ -1,15 +1,18 @@
 <?php
+define('BASE_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+
 session_start();
+$config = require BASE_PATH . 'config.php';
 
-require_once 'Database.php';
-require_once 'functions.php'; 
-require_once 'Response.php';
+require_once BASE_PATH . 'Database.php';
+require_once BASE_PATH . 'functions.php'; 
+require_once BASE_PATH . 'Response.php';
 
-//admin photo and name from data base
-$db = new Database();
+$db = new Database($config);
 $adminData = $db->query("SELECT Name, Profile_picture FROM users WHERE ID = 2")->statement->fetch();
+
 $current_admin_name = $adminData['Name'] ?? 'Guest';
-$current_admin_image = './' . str_replace('\\', '/', $adminData['Profile_picture'] ?? '');
 
+$current_admin_image = $config['base_url'] . str_replace('\\', '/', $adminData['Profile_picture'] ?? '');
 
-require 'router.php';
+require BASE_PATH . 'router.php';

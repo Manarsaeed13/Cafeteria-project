@@ -62,17 +62,9 @@
   </div>
 
   <nav aria-label="Page navigation" class="mt-4">
-    <ul class="pagination justify-content-center gap-1">
-      <li class="page-item"><a class="page-link border-0 rounded-3 text-success bg-transparent pagination-arrow" href="#" aria-label="First"><i class="bi bi-chevron-double-left"></i></a></li>
-      <li class="page-item"><a class="page-link border-0 rounded-3 text-success bg-transparent pagination-arrow" href="#" aria-label="Previous"><i class="bi bi-chevron-left"></i></a></li>
-      <li class="page-item"><a class="page-link border-0 rounded-3 page-number-btn active-page" href="#">1</a></li>
-      <li class="page-item"><a class="page-link border-0 rounded-3 page-number-btn text-dark bg-transparent" href="#">2</a></li>
-      <li class="page-item"><a class="page-link border-0 rounded-3 page-number-btn text-dark bg-transparent" href="#">3</a></li>
-      <li class="page-item"><span class="page-link border-0 bg-transparent text-muted">...</span></li>
-      <li class="page-item"><a class="page-link border-0 rounded-3 text-success bg-transparent pagination-arrow" href="#" aria-label="Next"><i class="bi bi-chevron-right"></i></a></li>
-      <li class="page-item"><a class="page-link border-0 rounded-3 text-success bg-transparent pagination-arrow" href="#" aria-label="Last"><i class="bi bi-chevron-double-right"></i></a></li>
+  <ul class="pagination justify-content-center gap-1" id="pagination-container">
     </ul>
-  </nav>
+</nav>
 </div>
 
 <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">

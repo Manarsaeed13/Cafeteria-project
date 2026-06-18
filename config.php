@@ -1,3 +1,4 @@
+
 <?php
 return [
     'host'     => 'localhost',
@@ -6,5 +7,6 @@ return [
     'user'     => 'root',
     'password' => '',
     'charset'  => 'utf8mb4', 
-    'base_url' => '/cafetaria-project/'
+    'base_url' => '/cafetaria-project/',
+    'base_path' => __DIR__ . DIRECTORY_SEPARATOR
 ];

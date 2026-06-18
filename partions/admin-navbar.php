@@ -267,6 +267,10 @@
       </div>
 
       <div class="d-none d-md-flex nav-links-desktop">
+
+      <a class="nav-link-custom <?= $current_url ==='/dashboard'? 'active' : '' ?>" href="/dashboard">Dashboard</a>
+
+      
         <a class="nav-link-custom <?= $current_url === '/admin-home' ? 'active' : '' ?>" href="/admin-home">Home</a>
 
         <a class="nav-link-custom <?= $current_url === '/products' ? 'active' : '' ?>" href="/products">Products</a>
@@ -276,6 +280,10 @@
     <a class="nav-link-custom <?= $current_url === '/admin/manual_order' ? 'active' : '' ?>" href="/admin/manual_order">Manual Order</a>
 
         <a class="nav-link-custom <?= $current_url ==='/admin/checks'? 'active' : '' ?>" href="/admin/checks">Checks</a>
+
+
+        
+        
       </div>
 
 
@@ -313,6 +321,10 @@
 
         <a href="/admin/checks" class="sidebar-link <?= $current_url === '/admin/checks' ? 'active' : '' ?>">
           <i class="bi bi-receipt-cutoff"></i> Checks
+        </a>
+
+        <a href="/dashboard" class="sidebar-link <?= $current_url === '/dashboard' ? 'active' : '' ?>">
+          <i class="bi bi-receipt-cutoff"></i> Dashboard
         </a>
 
 
