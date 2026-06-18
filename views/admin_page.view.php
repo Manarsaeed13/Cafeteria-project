@@ -3,7 +3,7 @@ $admin_name = $admin_profile_data["Name"] ?? "Admin";
 $admin_email = $admin_profile_data["E-mail"] ?? "N/A";
 $admin_role = $admin_profile_data["role"] ?? "Admin";
 $admin_ext = $admin_profile_data["Ext"] ?? "N/A";
-$admin_img = './' . str_replace('\\', '/', $admin_profile_data["Profile_picture"] ?? 'images/default_avatar.png');
+$admin_img = './' . str_replace('\\', '/', $admin_profile_data["Profile_picture"] ?? '../../images/Jone.jpg');
 
 $products_count = $products_count ?? 0;
 $users_count = $users_count ?? 0;

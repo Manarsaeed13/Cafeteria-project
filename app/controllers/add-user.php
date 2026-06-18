@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Database.php';
+require_once __DIR__ . '/../../Database.php';
 $db = new Database();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $rooms = $db->query("SELECT * FROM rooms")->statement->fetchAll();
 
-include 'partions/admin-navbar.php';
-require 'views/add-user.view.php';
-include 'partions/footer.php';
+include __DIR__ . '/../../partions/admin-navbar.php';
+require __DIR__ . '/../../views/add_user.view.php';
+include  __DIR__ .'/../../partions/footer.php';
 ?>
