@@ -1,8 +1,18 @@
+<?php
+session_start();
+require_once 'Database.php';
+$config = require 'config.php';
+$db= new Database($config , 'root', '');
+$categories = $db->query("SELECT * FROM categories")->get();
+?>
+
+
+
 <div class="container">
     <div class="card p-5 rounded-4 shadow-lg mx-auto border-0" style="max-width: 900px; background-color: #E7E1B1;">
         <h1 class="fw-bold mb-5 text-success">Add Product</h1>
 
-        <form id="addProductForm" class="needs-validation" novalidate>
+        <form action="add-product-controller.php" method="POST" id="addProductForm" class="needs-validation" enctype="multipart/form-data" novalidate>
             <!-- Product Name -->
             <div class="row mb-4">
                 <label for="productName" class="col-md-3 col-form-label fs-5 fw-semibold">Product</label>
@@ -31,9 +41,9 @@
                     <div class="d-flex gap-3 align-items-center">
                         <select id="productCategory" name="category" class="form-select form-select-lg border-2 border-success" required>
                             <option value="" selected disabled>Select Category</option>
-                            <option value="1">Hot Drinks</option>
-                            <option value="2">Cold Drinks</option>
-                            <option value="3">Snacks</option>
+                            <?php foreach ($categories as $category): ?>
+                                <option value="<?= $category['ID'] ?>"><?= htmlspecialchars($category['Name']) ?></option>
+                            <?php endforeach; ?>
                         </select>
                         <a href="#" class="text-decoration-none fw-bold text-success">+ Add Category</a>
                     </div>

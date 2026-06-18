@@ -1,4 +1,4 @@
-
+products
 -- version 6.0.0-dev+20260526.9a43c2e222
 -- https://www.phpmyadmin.net/
 --
