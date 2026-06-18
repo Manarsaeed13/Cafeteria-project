@@ -1,101 +1,31 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) { session_start(); }
+if (!isset($_SESSION['reset_email'])) { header("Location: forget-password.php"); exit(); }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $conn = new mysqli("localhost", "root", "", "cafeteria", 3306);
+    $code = $conn->real_escape_string($_POST['code']); $email = $_SESSION['reset_email'];
+    $check = $conn->query("SELECT * FROM users WHERE email='$email' AND Reset_token='$code'");
+    if ($check->num_rows > 0) { header("Location: reset-password.php"); exit(); }
+    else { echo "<script>alert('Invalid verification code!');</script>"; }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Verify Code</title>
-
-<link rel="stylesheet" href="css/bootstrap.css">
-
-<style>
-
-body{
-    background:#FBF5DD;
-    font-family:Arial;
-}
-
-.verify-box{
-    background:white;
-    width:40%;
-    margin:80px auto;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
-
-h2{
-    color:#0D530E;
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.btn-green{
-    background:#0D530E;
-    color:white;
-    width:100%;
-}
-
-</style>
-
+    <meta charset="UTF-8"><title>Verify Code</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style> body{ background-color:#FBF5DD; } .box{ width:400px; margin:60px auto; background:white; padding:40px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); } h2{ color:#0D530E; text-align:center; margin-bottom:20px; font-weight:bold;} .btn-verify{ background:#0D530E; color:white; width:100%; } .btn-verify:hover{ background-color:#306D29; } </style>
 </head>
-
 <body>
-
-<div style="
-background:#FBF5DD;
-padding:20px 40px;
-display:flex;
-justify-content:center;
-gap:50px;
-border-radius:20px;
-width:80%;
-margin:30px auto;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-">
-
-<a href="#" style="
-text-decoration:none;
-color:#0D530E;
-font-weight:bold;
-font-size:20px;
-">
-Home
-</a>
-
-
-<a href="#" style="
-text-decoration:none;
-color:#0D530E;
-font-weight:bold;
-font-size:20px;
-border-bottom:3px solid #306D29;
-padding-bottom:5px;
-">
-Verify Code
-</a>
-
-
+<?php include("partions/user-navbar.php"); ?>
+<div class="box">
+    <h2>Verification Code</h2>
+    <form action="" method="POST">
+        <label class="form-label" style="font-weight:bold; color:#306D29;">Enter 4-Digit Code</label>
+        <input type="text" name="code" class="form-control mb-3" placeholder="Enter verification code" required>
+        <button type="submit" class="btn btn-verify">Verify</button>
+    </form>
 </div>
-
-<div class="verify-box">
-
-<h2>Verify Code</h2>
-
-<form>
-
-<div class="mb-3">
-<label>Enter Code</label>
-<input type="text" class="form-control">
-</div>
-
-<button class="btn btn-green">
-Verify
-</button>
-
-</form>
-
-</div>
-
 </body>
 </html>

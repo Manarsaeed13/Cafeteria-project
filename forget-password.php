@@ -1,99 +1,36 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) { session_start(); }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $conn = new mysqli("localhost", "root", "", "cafeteria", 3306);
+    if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+    $email = $conn->real_escape_string($_POST['email']);
+    $result = $conn->query("SELECT * FROM users WHERE email='$email'");
+    if ($result->num_rows > 0) {
+        $code = rand(1000, 9999);
+        $conn->query("UPDATE users SET Reset_token='$code' WHERE email='$email'");
+        $_SESSION['reset_email'] = $email;
+        echo "<script>alert('Your Verification Code is: $code'); window.location.href='verify-code.php';</script>";
+        exit();
+    } else { echo "<script>alert('Email not found!');</script>"; }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Forgot Password</title>
-
-<link rel="stylesheet" href="css/bootstrap.css">
-
-<style>
-
-body{
-    background-color:#FBF5DD;
-}
-
-.box{
-    width:400px;
-    margin:100px auto;
-    background:white;
-    padding:40px;
-    border-radius:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
-
-h2{
-    color:#0D530E;
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.btn-send{
-    background:#0D530E;
-    color:white;
-    width:100%;
-}
-
-</style>
-
+    <meta charset="UTF-8"><title>Forgot Password</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style> body{ background-color:#FBF5DD; } .box{ width:400px; margin:60px auto; background:white; padding:40px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); } h2{ color:#0D530E; text-align:center; margin-bottom:20px; font-weight:bold;} .btn-send{ background:#0D530E; color:white; width:100%; } .btn-send:hover{ background-color:#306D29; } </style>
 </head>
-
-
-
 <body>
-<div style="
-background:#FBF5DD;
-padding:20px 40px;
-display:flex;
-justify-content:center;
-gap:50px;
-border-radius:20px;
-width:80%;
-margin:30px auto;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-">
-
-    <a href="#" style="
-    text-decoration:none;
-    color:#0D530E;
-    font-weight:bold;
-    font-size:20px;
-    ">
-    Home
-    </a>
-
-    <a href="#" style="
-    text-decoration:none;
-    color:#0D530E;
-    font-weight:bold;
-    font-size:20px;
-    ">
-    Forget Password
-    </a>
-
-</div>
+<?php include("partions/user-navbar.php"); ?>
 <div class="box">
-
-<h2>Forgot Password</h2>
-
-<form action="verify-code.php">
-
-<label>Email</label>
-
-<input 
-type="email"
-class="form-control mb-3"
-placeholder="Enter your email"
->
-
-<button class="btn btn-send">
-Send Code
-</button>
-
-</form>
-
+    <h2>Forgot Password</h2>
+    <form action="" method="POST">
+        <label class="form-label" style="font-weight:bold; color:#306D29;">Email Address</label>
+        <input type="email" name="email" class="form-control mb-3" placeholder="Enter your email" required>
+        <button type="submit" class="btn btn-send">Send Code</button>
+    </form>
 </div>
-
 </body>
 </html>
