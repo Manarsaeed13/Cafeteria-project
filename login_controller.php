@@ -18,9 +18,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if ($user) {
      if (password_verify($password, $user['Password'])) {
 
-        $_SESSION['user_id'] = $user['ID'];
-        $_SESSION['user_name'] = $user['Name'];
-        $_SESSION['user_role']= $user['Role'];
+       $_SESSION['user'] = [
+       'id'    => $user['ID'],
+       'name'  => $user['Name'],
+       'role'  => $user['Role'],
+       'email' => $user['E-mail'],
+       'phone' => $user['Phone'] ?? '',
+       'image' => $user['Image'] ?? '',
+];
         header('Location: index.php');
         exit();
      }else {
@@ -30,6 +35,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     } else {
         header('location: login_view.php');
         exit();
+}
 }
 
 
