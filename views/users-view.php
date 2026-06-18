@@ -12,13 +12,16 @@
   
 
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="page-main-title h2 fw-bold">All Users</h1>
-    <a href="/add-user" class="btn btn-add-user fw-bold px-3 py-2">
-      <i class="bi bi-person-plus-fill me-1"></i> Add User
-    </a>
-</div>
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 users-header">
+        <h1 class="page-main-title">All Users</h1>
 
+        <a href="/add-user" class="btn btn-add-user">
+            <i class="bi bi-person-plus-fill"></i>
+            <span>Add User</span>
+        </a>
+    </div>
+</div>
 
   <div class="card users-card p-4 shadow-sm border-0">
     <div class="table-responsive">
