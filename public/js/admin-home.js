@@ -71,7 +71,6 @@ window.removeFromCart = function(id) {
     updateCartUI();
 };
 
-// 5. زر التأكيد
 document.addEventListener('DOMContentLoaded', function() {
     const confirmBtn = document.getElementById("confirmBtn");
 
@@ -79,18 +78,39 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmBtn.addEventListener("click", function() {
             const userSelect = document.getElementById("user-select");
             const roomSelect = document.getElementById("room-select");
-            const notes = document.getElementById("order-notes").value;
 
             const cartWarning = document.getElementById("cart-warning");
             const userWarning = document.getElementById("user-warning");
             const roomWarning = document.getElementById("room-warning");
 
-         
             cartWarning.classList.add("d-none");
             userWarning.classList.add("d-none");
             roomWarning.classList.add("d-none");
 
             let hasError = false;
+
+            const rawNotes = document.getElementById("order-notes").value;
+            const notes = rawNotes.trim();
+
+            let notesError = document.getElementById("notes-error");
+            if (!notesError) {
+                notesError = document.createElement('div');
+                notesError.id = 'notes-error';
+                notesError.className = 'text-danger small mt-1';
+                document.getElementById("order-notes").parentNode.appendChild(notesError);
+            }
+            notesError.textContent = '';
+
+            if (rawNotes.length > 0 && notes === '') {
+                notesError.textContent = 'Message cannot be spaces only';
+                hasError = true;
+            } else if (notes.length > 0 && notes.length < 2) {
+                notesError.textContent = 'Message must be at least 2 characters';
+                hasError = true;
+            } else if (notes.length > 100) {
+                notesError.textContent = 'Message cannot exceed 100 characters';
+                hasError = true;
+            }
 
             if (cart.length === 0) { cartWarning.classList.remove("d-none"); hasError = true; }
             if (!userSelect.value) { userWarning.classList.remove("d-none"); hasError = true; }
@@ -110,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         userSelect.value = "";
                         roomSelect.value = "";
                         document.getElementById("order-notes").value = "";
-                    window.location.href = '/admin/checks';
+                        window.location.href = '/admin/checks';
                     } else {
                         console.error("Server error:", data.message);
                     }

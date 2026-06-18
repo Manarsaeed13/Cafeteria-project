@@ -29,7 +29,34 @@ if (empty($users) || empty($rooms)) {
 
 $user_id = $users[0]['ID'];
 $room_id = $rooms[0]['ID'];
-$notes   = $data['notes'] ?? '';
+if (!function_exists('xss')) {
+    function xss($value) {
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+    }
+}
+
+$rawNotes = $data['notes'] ?? '';
+$notes = trim($rawNotes);
+
+if (strlen($rawNotes) > 0 && $notes === '') {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Message cannot be spaces only']);
+    exit;
+} elseif (mb_strlen($notes) > 0 && mb_strlen($notes) < 2) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Message must be at least 2 characters']);
+    exit;
+} elseif (mb_strlen($notes) > 100) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Message cannot exceed 100 characters']);
+    exit;
+}
+
+if ($notes !== '') {
+    $notes = xss($notes);
+}
+
+
 
 $total = 0;
 foreach ($data['cart'] as $item) {

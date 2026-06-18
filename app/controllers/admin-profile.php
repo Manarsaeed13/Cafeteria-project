@@ -2,9 +2,9 @@
 require_once __DIR__ . "/../../Database.php";
 require_once __DIR__ . "/../../functions.php";
 
-session_start();
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
-    header("Location: /login_view.php");
+    $config = require __DIR__ . "/../../config.php";
+ header("Location: " . $config['base_url'] . "login");
     exit();
 }
 

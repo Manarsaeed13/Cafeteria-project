@@ -4,7 +4,7 @@
 
             <h2 class="text-center mb-4" style="color: #0D530E; font-weight: bold; font-size: 28px;">Add User</h2>
             
-            <form action="/add-user" method="post" enctype="multipart/form-data" 
+            <form action="/cafetaria-project/login-submit" method="post" enctype="multipart/form-data" 
                   style="background-color: #E7E1B1; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);" class="p-4">
                 
                 <div class="mb-3">
@@ -63,3 +63,6 @@
 </div>
 
 <script src="public/js/add_user.js"></script>
+
+
+
