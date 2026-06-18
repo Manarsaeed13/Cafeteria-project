@@ -1,5 +1,3 @@
-
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
@@ -37,9 +35,16 @@
                 <div class="mb-3">
                     <label for="room" class="form-label" style="color: #0D530E; font-weight: 600;">Room No:</label>
                     <select name="Room_ID" id="room" class="form-select">
-                        <?php foreach ($rooms as $room): ?>
-                            <option value="<?= $room['ID'] ?>"><?= $room['Room_number'] ?></option>
-                        <?php endforeach; ?>
+                        <option value="" selected disabled>Select Room</option>
+                        <?php if (isset($rooms) && is_array($rooms) && count($rooms) > 0): ?>
+                            <?php foreach ($rooms as $room): ?>
+                                <option value="<?= htmlspecialchars($room['ID']) ?>">
+                                    <?= htmlspecialchars($room['Room_number']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <option value="">No rooms found</option>
+                        <?php endif; ?>
                     </select>
                 </div>
                 
@@ -57,6 +62,4 @@
     </div>
 </div>
 
-    <script src="public/js/add_user.js"></script>
-
-
+<script src="public/js/add_user.js"></script>
