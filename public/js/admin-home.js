@@ -1,6 +1,5 @@
 let cart = [];
 
-// 1. ميزة البحث: تبحث في المنتجات المعروضة في الصفحة
 document.getElementById('search-input')?.addEventListener('input', (e) => {
     const term = e.target.value.toLowerCase().trim();
     document.querySelectorAll('.product-col').forEach(col => {
@@ -9,10 +8,15 @@ document.getElementById('search-input')?.addEventListener('input', (e) => {
     });
 });
 
-// 2. إضافة المنتج للسلة: يتم استدعاؤها من الـ HTML مباشرة
+document.getElementById('user-select').addEventListener('change', function() {
+    if(this.value) document.getElementById('user-warning').classList.add('d-none');
+});
+document.getElementById('room-select').addEventListener('change', function() {
+    if(this.value) document.getElementById('room-warning').classList.add('d-none');
+});
+
 window.addToCart = function(product) {
-    console.log("Adding product:", product); // للتأكد من أن الكود يعمل
-    
+    document.getElementById('cart-warning').classList.add('d-none');
     const existingItem = cart.find(item => item.id === product.id);
     if (existingItem) {
         existingItem.quantity++;
@@ -22,11 +26,9 @@ window.addToCart = function(product) {
     updateCartUI();
 };
 
-// 3. تحديث واجهة السلة (الجدول)
 window.updateCartUI = function() {
     const cartContainer = document.getElementById("cart-items");
     const totalPriceElement = document.getElementById("total-price");
-    
     if (!cartContainer) return;
 
     if (cart.length === 0) {
@@ -37,7 +39,6 @@ window.updateCartUI = function() {
 
     let html = "";
     let total = 0;
-
     cart.forEach(item => {
         total += item.quantity * item.price;
         html += `
@@ -52,12 +53,10 @@ window.updateCartUI = function() {
                 <td><button class="btn btn-sm text-danger" onclick="removeFromCart(${item.id})">×</button></td>
             </tr>`;
     });
-
     cartContainer.innerHTML = html;
     totalPriceElement.innerText = total;
 };
 
-// 4. تغيير الكمية
 window.changeQty = function(id, delta) {
     const item = cart.find(i => i.id === id);
     if (item) {
@@ -67,36 +66,79 @@ window.changeQty = function(id, delta) {
     }
 };
 
-// 5. حذف منتج من السلة
 window.removeFromCart = function(id) {
     cart = cart.filter(i => i.id !== id);
     updateCartUI();
 };
 
-// 6. التعامل مع زر التأكيد
-document.getElementById("confirmBtn")?.addEventListener("click", function() {
-    const userSelect = document.getElementById("user-select");
-    const roomSelect = document.getElementById("room-select");
-    const cartWarning = document.getElementById("cart-warning");
+document.addEventListener('DOMContentLoaded', function() {
+    const confirmBtn = document.getElementById("confirmBtn");
 
-    let hasError = false;
+    if (confirmBtn) {
+        confirmBtn.addEventListener("click", function() {
+            const userSelect = document.getElementById("user-select");
+            const roomSelect = document.getElementById("room-select");
 
-    if (cart.length === 0) {
-        cartWarning.classList.remove("d-none");
-        hasError = true;
+            const cartWarning = document.getElementById("cart-warning");
+            const userWarning = document.getElementById("user-warning");
+            const roomWarning = document.getElementById("room-warning");
+
+            cartWarning.classList.add("d-none");
+            userWarning.classList.add("d-none");
+            roomWarning.classList.add("d-none");
+
+            let hasError = false;
+
+            const rawNotes = document.getElementById("order-notes").value;
+            const notes = rawNotes.trim();
+
+            let notesError = document.getElementById("notes-error");
+            if (!notesError) {
+                notesError = document.createElement('div');
+                notesError.id = 'notes-error';
+                notesError.className = 'text-danger small mt-1';
+                document.getElementById("order-notes").parentNode.appendChild(notesError);
+            }
+            notesError.textContent = '';
+
+            if (rawNotes.length > 0 && notes === '') {
+                notesError.textContent = 'Message cannot be spaces only';
+                hasError = true;
+            } else if (notes.length > 0 && notes.length < 2) {
+                notesError.textContent = 'Message must be at least 2 characters';
+                hasError = true;
+            } else if (notes.length > 100) {
+                notesError.textContent = 'Message cannot exceed 100 characters';
+                hasError = true;
+            }
+
+            if (cart.length === 0) { cartWarning.classList.remove("d-none"); hasError = true; }
+            if (!userSelect.value) { userWarning.classList.remove("d-none"); hasError = true; }
+            if (!roomSelect.value) { roomWarning.classList.remove("d-none"); hasError = true; }
+
+            if (!hasError) {
+                fetch('/save-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ cart, user: userSelect.value, room: roomSelect.value, notes })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        cart = [];
+                        updateCartUI();
+                        userSelect.value = "";
+                        roomSelect.value = "";
+                        document.getElementById("order-notes").value = "";
+                        window.location.href = '/admin/checks';
+                    } else {
+                        console.error("Server error:", data.message);
+                    }
+                })
+                .catch(err => console.error("Error:", err));
+            }
+        });
     } else {
-        cartWarning.classList.add("d-none");
-    }
-
-    // تأكدي من اختيار مستخدم وغرفة
-    if (!userSelect.value || !roomSelect.value) {
-        alert("Please select User and Room!");
-        hasError = true;
-    }
-
-    if (!hasError) {
-        console.log("Order Confirmed!", { cart, user: userSelect.value, room: roomSelect.value });
-        alert("Order placed successfully!");
-        // هنا يمكنك إضافة كود الإرسال للسيرفر لاحقاً
+        console.error("Confirm button not found!");
     }
 });

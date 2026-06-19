@@ -11,7 +11,7 @@ $products = $db->query("SELECT * FROM products")->get();
 <head>
     <meta charset="UTF-8">
     <title>All Products</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+   <link rel="stylesheet" href="/public/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body class="bg-light">
@@ -51,5 +51,9 @@ $products = $db->query("SELECT * FROM products")->get();
             </table>
         </div>
     </div>
+
+    <script src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery-4.0.0.min.js"></script>
+
 </body>
 </html>

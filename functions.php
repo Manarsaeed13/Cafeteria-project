@@ -17,10 +17,12 @@ if (!function_exists('authorize')) {
     }
 }
 
-function abort($code = 404) {
-    http_response_code($code);
-    require "views/errors/{$code}.php"; 
-    die();
+if (!function_exists('abort')) {
+    function abort($code = 404) {
+        http_response_code($code);
+     require BASE_PATH . "views/errors/{$code}.php";
+        die();
+    }
 }
 
 if (!function_exists('xss')) {

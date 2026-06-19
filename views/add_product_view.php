@@ -13,7 +13,7 @@ $categories = $db->query("SELECT * FROM categories")->get();
         <h1 class="fw-bold mb-5 text-success">Add Product</h1>
 
         <form action="add-product-controller.php" method="POST" id="addProductForm" class="needs-validation" enctype="multipart/form-data" novalidate>
-            <!-- Product Name -->
+            <!-- Product name -->
             <div class="row mb-4">
                 <label for="productName" class="col-md-3 col-form-label fs-5 fw-semibold">Product</label>
                 <div class="col-md-7">
@@ -63,7 +63,7 @@ $categories = $db->query("SELECT * FROM categories")->get();
                 </div>
             </div>
 
-            <!-- Action Buttons -->
+            <!-- Action buttons -->
             <div class="row">
                 <div class="col-md-7 offset-md-3 d-flex gap-3">
                     <button type="submit" class="btn btn-success btn-lg px-5 text-white fw-bold shadow-sm">Save</button>
@@ -75,7 +75,6 @@ $categories = $db->query("SELECT * FROM categories")->get();
 </div>
 
 <script>
-// Preview image and convert to Base64
 document.getElementById('productImage').addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (file) {
@@ -103,7 +102,6 @@ document.getElementById('addProductForm').addEventListener('submit', function(ev
 
     const imageBase64 = document.getElementById('productImage').dataset.base64 || 'https://via.placeholder.com/150';
 
-    // Save to LocalStorage
     const newProduct = {
         id: Date.now(),
         name: document.getElementById('productName').value,
